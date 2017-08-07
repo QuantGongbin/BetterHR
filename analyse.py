@@ -10,7 +10,7 @@ from elasticsearch import Elasticsearch
 
 es = Elasticsearch()
 
-query_string = '关于江苏省2017二建考试'
+query_string = 'XX'
 number = 40
 min_query = 10
 tfidf = analyse.extract_tags
@@ -35,7 +35,7 @@ q['_source'] = ['title', 'keyword', 'weight']
 
 result = es.search(index='betterknowledge', body=q)
 #return_num = result['hits']['total']
-#print(return_num)
+print(result)
 result = result['hits']['hits']
 #print("返回的结果长度为%d" % len(result))
 query_return = {}
@@ -56,7 +56,7 @@ for t in range(len(result)):
     pd = pd.sort_values(by='score', ascending=False)
     #query_content.append(q)
 result_content = []
-for t in range(number):
+for t in range(len(result)):
     q = {}
     q['uuid'] = pd.at[t, 'uuid']
     q['title'] = pd.at[t, 'title']
